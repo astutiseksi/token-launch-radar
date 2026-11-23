@@ -1,15 +1,100 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Token Radar: pre-token protocols ranked by implied value</title>
+<title>Token Radar — pre-token protocols ranked by implied value</title>
 <link rel="stylesheet" href="app.css">
+<script src="../data.js"></script>
+<script src="app.js" defer></script>
 </head>
 <body>
-<a class="skip" href="#board">Skip to the board</a>
-<main id="board" tabindex="-1" aria-busy="true"></main>
-<script src="../data.js"></script>
-<script src="app.js"></script>
+<header class="masthead">
+  <p class="brand"><span class="dot" aria-hidden="true"></span>Token Radar</p>
+  <p class="mastmeta" id="mastmeta">Snapshot — · DefiLlama protocol index · radar model</p>
+</header>
+
+<main class="page">
+  <section class="hero">
+    <div class="hero-copy">
+      <h1 id="heroTitle">Watchlist protocols, ranked by implied value</h1>
+      <p id="heroIntro" class="lede"></p>
+      <dl class="hero-stats">
+        <div><dt>Board TVL</dt><dd id="statTvl">—</dd></div>
+        <div><dt>Median implied value</dt><dd id="statMedian">—</dd></div>
+        <div><dt>Largest category</dt><dd id="statCategory">—</dd></div>
+      </dl>
+    </div>
+    <dl class="hero-side" id="heroSide"></dl>
+  </section>
+
+  <section class="controls" aria-label="Board controls">
+    <div class="field-row">
+      <label class="field grow">Search
+        <input id="q" type="search" placeholder="Search name, category or chain" autocomplete="off">
+      </label>
+      <label class="field">Category
+        <select id="cat"><option value="">All categories</option></select>
+      </label>
+      <label class="field">Chain
+        <select id="chain"><option value="">All chains</option></select>
+      </label>
+      <label class="field">Risk
+        <select id="risk">
+          <option value="">Any risk</option>
+          <option value="low">low</option>
+          <option value="medium">medium</option>
+          <option value="high">high</option>
+        </select>
+      </label>
+      <label class="field">Min TVL
+        <select id="minTvl">
+          <option value="0">Any TVL</option>
+          <option value="10000000">$10M and up</option>
+          <option value="25000000">$25M and up</option>
+          <option value="50000000">$50M and up</option>
+          <option value="100000000">$100M and up</option>
+          <option value="250000000">$250M and up</option>
+          <option value="1000000000">$1B and up</option>
+        </select>
+      </label>
+    </div>
+    <div class="field-row second">
+      <div class="field">Token status
+        <div class="seg" role="tablist" aria-label="Token status">
+          <button id="tabPre" class="seg-btn on" role="tab" aria-selected="true">Pre-token</button>
+          <button id="tabLive" class="seg-btn" role="tab" aria-selected="false">Live token</button>
+        </div>
+      </div>
+      <div class="field">Scope
+        <button id="watchOnly" class="pill-btn" aria-pressed="false">Watchlist only</button>
+      </div>
+      <div class="field">Export
+        <button id="csvBtn" class="pill-btn">Download CSV</button>
+      </div>
+      <p class="count" id="rowCount" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section class="board-wrap">
+    <p class="board-note" id="boardNote"></p>
+    <table class="board" id="board">
+      <thead id="boardHead"></thead>
+      <tbody id="boardBody"></tbody>
+    </table>
+    <p class="empty" id="emptyMsg" hidden>No protocols match these filters.</p>
+  </section>
+
+  <footer class="foot">
+    <p>Implied values come from the snapshot's own figures — TVL, seven-day growth, time listed with no token on record, and chain breadth — through one shared model. Nothing here predicts a token launch or promises an airdrop.</p>
+  </footer>
+</main>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="sheet" id="sheet" aria-label="Protocol detail" hidden>
+  <div class="sheet-inner" id="sheetInner"></div>
+</aside>
+
+<noscript><p class="noscript">This radar needs JavaScript to render the board.</p></noscript>
 </body>
 </html>
